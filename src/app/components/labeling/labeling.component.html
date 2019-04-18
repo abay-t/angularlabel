@@ -1,0 +1,45 @@
+<div>
+  <button (click)="drawPolygon()"><i class="fas fa-draw-polygon fa-2x"></i></button>
+  <button (click)="undoPolygon()"><i class="fas fa-undo fa-2x"></i></button>
+  <button (click)="zoomin()"><i class="fas fa-search-plus fa-2x"></i></button>
+  <button (click)="zoomout()"><i class="fas fa-search-minus fa-2x"></i></button>
+
+  <button (click)="mcontrast()"><i class="fas fa-moon fa-2x"></i></button>
+  <button (click)="pcontrast()"><i class="fas fa-sun fa-2x"></i></button>
+  <br>
+  <button type=button (click)="prevImage()"><i class="fas fa-backward fa-2x"></i></button>
+  <button type=button (click)="nextImage()"><i class="fas fa-forward fa-2x"></i></button>
+</div>
+<div class="wrapperBlock">
+
+  <div class="canvas-block">
+    <canvas id="canvasImage" [ngClass]="{'drawing': drawing}" width="500" height="500"></canvas>
+
+    <canvas id="canvasMain" [ngClass]="{'drawing': drawing}" width="500" height="500"
+      (click)="canvasClick($event)"></canvas>
+
+  </div>
+  <div class="infoBlock">
+    <div id="infoDiv" class="bubble top">
+      <form action="">
+        Enter object name:<br>
+        <input [(ngModel)]="name" id="objectText" type="text" name="object">
+        <br>
+        Enter attributes:<br>
+        <textarea [(ngModel)]="attributes" id="attributesText" name="attributes"></textarea>
+        <br><br>
+        <button type=button (click)="doneInfoDiv()">Done</button> &nbsp;
+        <button type=button (click)="undoInfoDiv()">Undo (close)</button> &nbsp;
+        <button type=button (click)="deleteInfoDiv()">Delete</button>
+      </form>
+    </div>
+  </div>
+  <div class="polygons">
+    <ul *ngIf="polygons.length" class="polygons-list">
+      <li *ngFor="let polygon of polygons; let i=index;" (mouseenter)="polygonHover(polygon)" (mouseleave)="hoverOut()"
+        (click)="deletePolygon(polygon.name, i)">
+        {{polygon.name}}
+      </li>
+    </ul>
+  </div>
+</div>

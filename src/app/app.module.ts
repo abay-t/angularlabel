@@ -1,18 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LabelingComponent } from './components/labeling/labeling.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { HttpClientModule } from '@angular/common/http';
+import { RestService } from './components/labeling/rest.service'
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
+    HttpClientModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    LabelingComponent
+  ],
+  bootstrap: [AppComponent],
+  providers: [RestService]
 })
 export class AppModule { }
